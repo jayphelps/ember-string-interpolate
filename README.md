@@ -29,7 +29,7 @@ Output:
 ```
 
 ##Features
-* Inline property getter evaluation and observing
+* Inline property getter evaluation and observing/bindings!
 * Inline expression evaluation
 
 ##License
