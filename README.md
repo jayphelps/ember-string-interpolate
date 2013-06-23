@@ -10,7 +10,14 @@ App.PersonController = Ember.ObjectController.extend({
     firstName: 'Bilbo',
     lastName: 'Baggins',
     fullName: '$firstName $lastName'.interpolate(),
-    welcomeMessage: 'Welcome, $fullName! I can use expressions too like: ${fullName.toUpperCase()}'.interpolate()
+    
+    // Old way (many times even worse than this!)
+    welcomeMessage: function () {
+        return 'Welcome, ' + this.get('fullName') + '! Expressions too: ' + this.get('fullName').toUpperCase();
+    }.property('fullName'),
+    
+    // New way!
+    welcomeMessage: 'Welcome, $fullName! Expressions too: ${fullName.toUpperCase()}'.interpolate()
 });
 ```
 
