@@ -31,13 +31,13 @@ Output:
 
 ```html
 <div>
-    <h1>Welcome, Bilbo Baggins! I can use expressions too like: BILBO BAGGINS</h1>
+    <h1>Welcome, Bilbo Baggins! Expressions too: BILBO BAGGINS</h1>
 </div>
 ```
 
 ## Other Usage:
 
-Interpolation works outside of properties too. Just pass the context you want to use:
+Interpolation works outside of properties as well. Just pass the context you want to use:
 
 ```javascript
 var Robot = Ember.Object.extend({
