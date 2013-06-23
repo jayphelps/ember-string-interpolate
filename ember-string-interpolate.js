@@ -1,3 +1,9 @@
+/**
+ * Ember.String.interpolate
+ * (c) 2013 Jay Phelps
+ * MIT Licensed
+ * https://github.com/jayphelps/ember-string-interpolate
+ */
 (function (Ember) {
 
     function get(context, key) {
