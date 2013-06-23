@@ -50,6 +50,15 @@ var Robot = Ember.Object.extend({
 
 ```
 
+##EXTEND_PROTOTYPES = false
+If you've told Ember not to extend the native prototypes, this library will honor that as well.
+
+In that case, you need to wrap the string inside an Ember.String:
+```javascript
+Ember.String('Robot status is: $status').interpolate();
+```
+
+
 ##Features
 * Inline property getter evaluation and observing/bindings!
 * Inline expression evaluation
