@@ -28,6 +28,21 @@ Output:
 </div>
 ```
 
+## Other Usage:
+
+Interpolation works outside of properties too. Just pass the context you want to use:
+
+```javascript
+var Robot = Ember.Object.extend({
+    status: 'ready',
+    
+    alertStatusMessage: function () {
+        alert('Robot status is: $status'.interpolate(this));
+    }
+});
+
+```
+
 ##Features
 * Inline property getter evaluation and observing/bindings!
 * Inline expression evaluation
