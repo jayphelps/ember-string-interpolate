@@ -9,7 +9,9 @@ Adds string interpolation to Ember.String (i.e. no more unreadable getter concat
 App.PersonController = Ember.ObjectController.extend({
     firstName: 'Bilbo',
     lastName: 'Baggins',
-    fullName: '$firstName $lastName'.interpolate(),
+    // Since .interpolate() returns a computed property,
+    // you can chain any of the other methods like .volatile(), .meta(), etc
+    fullName: '$firstName $lastName'.interpolate().readOnly(),
     
     // Old way (many times even worse than this!)
     welcomeMessage: function () {
