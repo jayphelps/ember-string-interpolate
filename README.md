@@ -3,6 +3,9 @@ Ember.String.interpolate
 
 Adds string interpolation to Ember.String (i.e. no more unreadable getter concatenation)
 
+##Usage
+The syntax follows a similar convention to many languages with built-in interpolation. The dollar sign ($) is used to identify a property: `$firstName`, while the dollar sign followed by curly brackets allows evaluation of any JavaScript expression. `${firstName.toUpperCase()}`.
+
 ##Examples
 
 ```javascript
