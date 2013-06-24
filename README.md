@@ -69,6 +69,8 @@ Ember.String('Robot status is: $status').interpolate();
 * Inline property getter evaluation and observing/bindings!
 * Inline expression evaluation
 
+NOTE: Currently doesn't support mult-level properties, meaning for `$controller.something`, only controller is looked up. This is a bug and a fix is being tested for a release in the next day or two.
+
 ##License
 MIT Licensed
 
