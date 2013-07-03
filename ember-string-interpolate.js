@@ -6,6 +6,12 @@
  */
 (function (Ember) {
 
+    var identiferRegExp = /([$A-Z_][0-9A-Z_$]*(?:\.[$A-Z_][0-9A-Z_$]*)*)/gi;
+    var getterRegExp = new RegExp('\\$' + identiferRegExp.source, 'gi');
+    var expressionRegExp = /\${([^}]+)}/gi;
+    var notCallRegExp = /\b(?!\()/;
+    var variableRegExp = new RegExp('\(' + identiferRegExp.source + notCallRegExp.source + '\)', 'gi');
+
     function get(context, key) {
         var parts, value;
 
@@ -27,47 +33,76 @@
         return (value !== undefined && value !== null);
     }
 
-    function getPropertyKeys(str) {
-        var match, inner,
-            keys = [],
-            inlineRegex = /\$+([A-Z_][0-9A-Z_]*)/gi,
-            expressionRegex = /\${([^}]+)}/ig;
+    var ArrayProto = Array.prototype,
+        nativeIndexOf = ArrayProto.indexOf;
 
-        while (match = inlineRegex.exec(str)) {
-            keys.push(match[1]);
+    function indexOf(array, item) {
+        // If true, they didn't pass a useful array-like object.
+        if (array == null || array.length === undefined) return -1;
+
+        if (nativeIndexOf && array.indexOf === nativeIndexOf) {
+            return array.indexOf(item);
         }
 
-        while (match = expressionRegex.exec(str)) {
-            inner = match[1].match(/([A-Z0-9]+\b(?!\())/gi);
-            keys.push.apply(keys, inner);
+        for (var i = 0, l = array.length; i < l; i++) {
+            if (array[i] === item) return i;
+        }
+
+        // Exhausted all routes, it's not in there.
+        return -1;
+    };
+
+    function getPropertyKeys(str) {
+        var i, l, match, inner,
+            keys = [];
+
+        while (match = getterRegExp.exec(str)) {
+            // Get rid of variable variable dollar signs since we can't include
+            // them as keys as they can change
+            match = match[1].replace(/^\$*/, '');
+            if (indexOf(keys, match) === -1) {
+                keys.push(match);
+            }
+        }
+
+        while (match = expressionRegExp.exec(str)) {
+            inner = match[1].match(variableRegExp);
+            for (i = 0, l = inner.length; i < l; i++) {
+                if (indexOf(keys, inner[i]) === -1) {
+                    keys.push(inner[i]);
+                }
+            }
         }
 
         return keys;
     }
 
     function interpolateExpressions(str, context) {
-        return str.replace(/\${([^}]+)}/gi, function (match, expression) {
+        return str.replace(expressionRegExp, function (match, expression) {
             var args = [],
                 values = [];
 
-            expression = expression.replace(/([A-Z0-9]+\b(?!\())/gi, function (match, key) {
-                var value = get(context, key);
-                
+            expression = expression.replace(variableRegExp, function (match, key) {
+                var value = get(context, key),
+                    keys = key.split('.'),
+                    lastKey = keys[keys.length-1];
+
                 if (isSet(value)) {
-                    args.push(key);
-                    values.push(value.toString());
+                    args.push(lastKey);
+                    values.push(value);
                 }
                 
-                return key;
+                return lastKey;
             });
 
             args.push('return ' + expression);
+
             return Function.apply(Function, args).apply(context, values);
         });
     }
 
     function interpolateGetters(str, context) {
-        return str.replace(/\$([$A-Z_][0-9A-Z_$]*(?:\.[$A-Z_][0-9A-Z_$]*)*)/gi, function (match, key) {
+        return str.replace(getterRegExp, function (match, key) {
             var polatedKey = interpolateGetters(key, context),
                 value = get(context, polatedKey);
 
@@ -102,11 +137,13 @@
                 return interpolate.call(str, this);
             });
 
+            console.log('KEYS', getPropertyKeys(str));
             ret = ret.property.apply(ret, getPropertyKeys(str));
         } else {
             ret = new InterpolatedString(this, context);
         }
 
+        console.log('prop',ret)
         return ret;
     }
 
