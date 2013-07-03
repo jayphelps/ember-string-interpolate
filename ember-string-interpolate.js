@@ -7,11 +7,20 @@
 (function (Ember) {
 
     function get(context, key) {
+        var parts, value;
+
         if (context.get) {
-            return context.get(key);
+            value = context.get(key);
         } else {
-            return context[key];
+            parts = key.split('.');
+            while (key = parts.shift()) {
+                context = context[key];
+            }
+
+            value = context;
         }
+
+        return value;
     }
 
     function isSet(value) {
@@ -58,7 +67,7 @@
     }
 
     function interpolateGetters(str, context) {
-        return str.replace(/\$(\$*[A-Z_][0-9A-Z_]*)/gi, function (match, key) {
+        return str.replace(/\$([$A-Z_][0-9A-Z_$]*(?:\.[$A-Z_][0-9A-Z_$]*)*)/gi, function (match, key) {
             var polatedKey = interpolateGetters(key, context),
                 value = get(context, polatedKey);
 
