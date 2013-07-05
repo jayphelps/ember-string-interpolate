@@ -12,7 +12,6 @@ The syntax follows a similar convention to many languages with built-in interpol
 
 If you want to get really crazy, it even supports variable variables. i.e. `$$propertyName` is roughly equivalent to this.get(this.get('propertyName')).
 ##Examples
-
 ```javascript
 App.PersonController = Ember.ObjectController.extend({
     firstName: 'Bilbo',
@@ -46,7 +45,6 @@ Output:
 ```
 
 ## Other Usage:
-
 Interpolation works outside of properties as well. Just pass the context you want to use:
 
 ```javascript
@@ -71,6 +69,18 @@ Ember.String('Robot status is: $status').interpolate();
 ##Under The Hood
 This library is basically an Ember wrapper for my generic [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) library. This adds all the Ember-goodness like properties, etc.
 See [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) documentation for additional configuration options like changing the identifier symbol to something other than `$`
+
+## Security Considerations
+Keep in mind that since it supports dynamic expression evaluation `${expression}`, interpolation should **never** be used on user-generated strings. But since properties looked up are not themselves interpolated, you can safely reference properties that contain un-safe strings. In practice, there aren't a lot of cases where you could run into this since you usually define the string to be interpolated, but it was worth noting.
+
+##### Unsafe!
+```javascript
+    userGeneratedString.interpolate()
+```
+##### Perfectly Safe!
+```javascript
+    '$userGeneratedString'.interpolate()
+```
 
 ##License
 MIT Licensed
