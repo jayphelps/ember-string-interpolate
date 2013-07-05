@@ -1,7 +1,11 @@
-Ember.String.interpolate
+Ember.String.interpolate v1.0
 =================
 
 Adds string interpolation to Ember.String (i.e. no more unreadable getter concatenation)
+
+##Features
+* Inline property getter evaluation and observing/bindings!
+* Inline expression evaluation
 
 ##Usage
 The syntax follows a similar convention to many languages with built-in interpolation. The dollar sign ($) is used to identify a property: `$firstName`, while the dollar sign followed by curly brackets allows evaluation of any JavaScript expression. `${firstName.toUpperCase()}`.
@@ -64,12 +68,9 @@ In that case, you need to wrap the string inside an Ember.String:
 Ember.String('Robot status is: $status').interpolate();
 ```
 
-
-##Features
-* Inline property getter evaluation and observing/bindings!
-* Inline expression evaluation
-
-NOTE: Currently doesn't support mult-level properties, meaning for `$controller.something`, only controller is looked up. This is a bug and a fix is being tested for a release in the next day or two.
+##Under The Hood
+This library is basically an Ember wrapper for my generic [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) library. This adds all the Ember-goodness like properties, etc.
+See [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) documentation for additional configuration options like changing the identifier symbol to something other than `$`
 
 ##License
 MIT Licensed
