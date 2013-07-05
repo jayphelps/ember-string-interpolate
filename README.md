@@ -75,11 +75,12 @@ Keep in mind that since it supports dynamic expression evaluation `${expression}
 
 ##### Unsafe!
 ```javascript
-    userGeneratedString.interpolate()
+var userGeneratedString = '${alert("exploited!")}';
+userGeneratedString.interpolate();
 ```
 ##### Perfectly Safe!
 ```javascript
-    '$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate()
+'$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate(context);
 ```
 
 ##License
