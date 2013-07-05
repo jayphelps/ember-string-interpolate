@@ -1,14 +1,17 @@
-Ember.String.interpolate
+Ember.String.interpolate v1.0
 =================
 
 Adds string interpolation to Ember.String (i.e. no more unreadable getter concatenation)
+
+##Features
+* Inline property getter evaluation and observing/bindings!
+* Inline expression evaluation
 
 ##Usage
 The syntax follows a similar convention to many languages with built-in interpolation. The dollar sign ($) is used to identify a property: `$firstName`, while the dollar sign followed by curly brackets allows evaluation of any JavaScript expression. `${firstName.toUpperCase()}`.
 
 If you want to get really crazy, it even supports variable variables. i.e. `$$propertyName` is roughly equivalent to this.get(this.get('propertyName')).
 ##Examples
-
 ```javascript
 App.PersonController = Ember.ObjectController.extend({
     firstName: 'Bilbo',
@@ -42,7 +45,6 @@ Output:
 ```
 
 ## Other Usage:
-
 Interpolation works outside of properties as well. Just pass the context you want to use:
 
 ```javascript
@@ -64,12 +66,21 @@ In that case, you need to wrap the string inside an Ember.String:
 Ember.String('Robot status is: $status').interpolate();
 ```
 
+##Under The Hood
+This library is basically an Ember wrapper for my generic [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) library. This adds all the Ember-goodness like properties, etc.
+See [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) documentation for additional configuration options like changing the identifier symbol to something other than `$`
 
-##Features
-* Inline property getter evaluation and observing/bindings!
-* Inline expression evaluation
+## Security Considerations
+Keep in mind that since it supports dynamic expression evaluation `${expression}`, interpolation should **never** be used on user-generated strings. But since properties looked up are not themselves interpolated, you can safely reference properties that contain un-safe strings. In practice, there aren't a lot of cases where you could run into this since you usually define the string to be interpolated, but it was worth noting.
 
-NOTE: Currently doesn't support mult-level properties, meaning for `$controller.something`, only controller is looked up. This is a bug and a fix is being tested for a release in the next day or two.
+##### Unsafe!
+```javascript
+    userGeneratedString.interpolate()
+```
+##### Perfectly Safe!
+```javascript
+    '$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate()
+```
 
 ##License
 MIT Licensed
