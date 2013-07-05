@@ -79,7 +79,7 @@ Keep in mind that since it supports dynamic expression evaluation `${expression}
 ```
 ##### Perfectly Safe!
 ```javascript
-    '$userGeneratedString'.interpolate()
+    '$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate()
 ```
 
 ##License
