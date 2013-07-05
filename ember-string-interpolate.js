@@ -179,7 +179,7 @@
     function interpolate(context) {
         var ret, str = this;
 
-        if (!context || !context.get) {
+        if (!context) {
             ret = Ember.computed(function () {
                 return interpolate.call(str, this);
             });
