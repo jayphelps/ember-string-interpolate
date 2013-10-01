@@ -94,5 +94,8 @@ var userGeneratedString = prompt('Please enter exploitative code');
 '$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate({ userGeneratedString: userGeneratedString });
 ```
 
+##Contributing/Issues
+Forks, pull requests and issue tickets are encouraged.
+
 ##License
 MIT Licensed
