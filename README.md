@@ -45,11 +45,21 @@ Output:
 ```
 
 ## Other Usage:
+Interpolation works with global variables. This is handy for localization if you're using an i18n library.
+
+```javascript
+window.status = 'online';
+
+var Robot = Ember.Object.extend({
+    statusMessage: 'Robot status is: $status'.interpolate()
+});
+
+
 Interpolation works outside of properties as well. Just pass the context you want to use:
 
 ```javascript
 var Robot = Ember.Object.extend({
-    status: 'ready',
+    status: 'online',
     
     alertStatusMessage: function () {
         alert('Robot status is: $status'.interpolate(this));
@@ -71,18 +81,18 @@ This library is basically an Ember wrapper for my generic [String.interpolate.js
 See [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) documentation for additional configuration options like changing the identifier symbol to something other than `$`
 
 ## Security Considerations
-Keep in mind that since it supports dynamic expression evaluation `${expression}`, interpolation should **never** be used on user-generated strings. But since properties looked up are not themselves interpolated, you can safely reference properties that contain un-safe strings. In practice, there aren't a lot of cases where you could run into this since you usually define the string to be interpolated, but it was worth noting.
+Keep in mind that since it supports dynamic expression evaluation `${expression}`, the .interpolate function should **never** be called directly on user-generated strings (unless you know exactly what you're doing). But since properties looked up are not themselves interpolated, you can safely reference properties that contain un-safe strings. In practice, there aren't a lot of cases where you could run into this since you usually define the string to be interpolated, but it was worth noting.
 
 ##### Unsafe!
 ```javascript
-var userGeneratedString = '${alert("exploited!")}';
+var userGeneratedString = prompt('Please enter exploitative code');
 userGeneratedString.interpolate();
 ```
 ##### Perfectly Safe!
 ```javascript
-'$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate(context);
+var userGeneratedString = prompt('Please enter exploitative code');
+'$userGeneratedString or even ${userGeneratedString.toUpperCase()}'.interpolate({ userGeneratedString: userGeneratedString });
 ```
 
 ##License
 MIT Licensed
-
