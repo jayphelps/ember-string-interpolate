@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+</head>
+<body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://builds.emberjs.com/handlebars-1.0.0.js"></script>
+    <script src="http://builds.emberjs.com/tags/v1.1.2/ember.js"></script>
+    <script src="ember-string-interpolate.js"></script>
+    <script>
+
+    var Robot = Ember.Object.extend({
+        status: 'offline',
+        
+        /**
+         * Most common and cleanest form, using native prototype extensions
+         */
+        statusMessage1: 'robot is $status'.interpolate(),
+
+        /**
+         * Alternative form, if you have native prototype extensions off
+         */
+        statusMessage2: Ember.computed.interpolate('robot is $status'),
+
+        /**
+         * Manual interpolation, possibly useful in observers or other cases
+         */
+        statusMessage3: function () {
+            return Ember.String.interpolate('robot is $status', { status: this.get('status') });
+        }.property('status')
+    });
+
+    function runTest(robot, expectedMessage) {
+        Ember.assert('status 1 is invalid', expectedMessage === robot.get('statusMessage1'));
+        Ember.assert('status 2 is invalid', expectedMessage === robot.get('statusMessage2'));
+        Ember.assert('status 3 is invalid', expectedMessage === robot.get('statusMessage3'));
+
+        console.log('status 1:', robot.get('statusMessage1'));
+        console.log('status 2:', robot.get('statusMessage2'));
+        console.log('status 3:', robot.get('statusMessage3'));
+        console.log('--');
+    }
+
+    var robot = Robot.create();
+
+    runTest(robot, 'robot is offline');
+    robot.set('status', 'online');
+    runTest(robot, 'robot is online');
+
+    </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /**
- * Ember.String.interpolate
+ * Ember.String.interpolate v1.1
  * (c) 2013 Jay Phelps
  * MIT Licensed
  * https://github.com/jayphelps/ember-string-interpolate
@@ -11,52 +11,23 @@
     var ENV = window.ENV || {},
         getPropertyKeys = InterpolatedString.getPropertyKeys;
 
-    function interpolate(context) {
-        var ret, str = this;
+    var emberStringInterpolate = Ember.String.interpolate = function (str, context) {
+        return (new InterpolatedString(str, context)).toString();
+    };
 
-        if (!context) {
-            ret = Ember.computed(function () {
-                return interpolate.call(str, this);
-            });
+    var emberComputedInterpolate = Ember.computed.interpolate = function (str) {
+        var ret = Ember.computed(function () {
+            return emberStringInterpolate(str, this);
+        });
 
-            ret = ret.property.apply(ret, getPropertyKeys(str));
-        } else {
-            ret = new InterpolatedString(this, context);
-        }
-
-        return ret;
-    }
+        return ret.property.apply(ret, getPropertyKeys(str));
+    };
 
     // Honor the Ember convention for extending native prototypes
     if (ENV.EXTEND_PROTOTYPES || Ember.EXTEND_PROTOTYPES) {
-        String.prototype.interpolate = interpolate;
+        String.prototype.interpolate = function () {
+            return emberComputedInterpolate(this);
+        };
     }
-
-    var nativeEmberString = Ember.String,
-        EmberStringProto;
-
-    function EmberString(str) {
-        var isConstructed = (this instanceof EmberString);
-        // Force construction if they're missing `new`
-        if (!isConstructed) return new EmberString(str);
-
-        String.call(this, str);
-        this._value = str;
-    }
-
-    EmberString.prototype = new String();
-    EmberStringProto = EmberString.prototype;
-    
-    EmberStringProto.constructor = EmberString;
-    EmberStringProto.interpolate = interpolate;
-
-    EmberStringProto.toString = EmberStringProto.valueOf = function () {
-        return this._value;
-    };
-
-    Ember.mixin(EmberStringProto, nativeEmberString);
-    Ember.mixin(EmberString, nativeEmberString);
-
-    Ember.String = EmberString;
 
 })(Ember);
