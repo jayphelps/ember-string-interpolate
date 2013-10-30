@@ -1,4 +1,4 @@
-Ember.String.interpolate v1.0
+Ember.String.interpolate v1.1
 =================
 
 Adds string interpolation to Ember.String (i.e. no more unreadable getter concatenation)
@@ -55,14 +55,15 @@ var Robot = Ember.Object.extend({
 });
 ```
 
-Interpolation works outside of properties as well. Just pass the context you want to use:
+Interpolation works outside of properties as well using the `Ember.String.interpolate` helper:
 
 ```javascript
 var Robot = Ember.Object.extend({
     status: 'online',
     
     alertStatusMessage: function () {
-        alert('Robot status is: $status'.interpolate(this));
+    	var message = Ember.String.interpolate('Robot status is: $status', this);
+        alert(message);
     }
 });
 
@@ -71,9 +72,13 @@ var Robot = Ember.Object.extend({
 ##EXTEND_PROTOTYPES = false
 If you've told Ember not to extend the native prototypes, this library will honor that as well.
 
-In that case, you need to wrap the string inside an Ember.String:
+In that case, you can use it similiar to normal computed properties:
+
 ```javascript
-Ember.String('Robot status is: $status').interpolate();
+var Robot = Ember.Object.extend({
+    status: 'offline',
+    statusMessage2: Ember.computed.interpolate('robot is $status')
+});
 ```
 
 ##Under The Hood
