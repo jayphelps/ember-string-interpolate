@@ -1,7 +1,7 @@
 Ember.String.interpolate v1.1
 =================
 
-Adds string interpolation to `Ember.String` (i.e. no more unreadable getter concatenation) and more recently adds `Ember.computed.interpolate("My $value")`.
+Adds string interpolation as a computed property to Ember.js (i.e. no more unreadable getter concatenation).
 
 ##Features
 * Inline property getter evaluation and observing/bindings!
