@@ -1,0 +1,26 @@
+{
+    "predef": [
+        "console",
+        "Ember",
+        "equal",
+        "asyncTest",
+        "test",
+        "raises",
+        "deepEqual",
+        "start",
+        "stop",
+        "ok",
+        "strictEqual",
+        "module",
+        "expect",
+        "minispade",
+        "async",
+        "invokeAsync"
+    ],
+
+    "node": true,
+    "es5": true,
+    "browser": true,
+
+    "strict": true
+}

@@ -1,0 +1,34 @@
+{
+    "name": "Ember.String.interpolate",
+    "version": "1.1.0",
+    "description": "Adds interpolated string computed properties to Ember (i.e. no more unreadable getter concatenation)",
+    "homepage": "https://github.com/jayphelps/ember.string.interpolate",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/jayphelps/ember.string.interpolate.git"
+    },
+    "bugs": "https://github.com/jayphelps/ember.string.interpolate/issues",
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://mit-license.org/"
+    }],
+    "author": {
+        "name": "Jay Phelps",
+        "web": "https://github.com/jayphelps"
+    },
+    "main": "ember-string-interpolate.js",
+    "scripts": {
+        "install": "grunt npm-install",
+        "test": "grunt test --verbose"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "qunitjs": "~1.11.0",
+        "jquery": "~1.8.3",
+        "handlebars": "~1.1.2",
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.4.3",
+        "grunt-contrib-qunit": "~0.2.1",
+        "grunt-curl": "1.2.1"
+    }
+}
