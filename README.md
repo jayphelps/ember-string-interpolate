@@ -82,7 +82,7 @@ var Robot = Ember.Object.extend({
 ```
 
 ##Under The Hood
-This library is basically an Ember wrapper for my generic [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) library. This adds all the Ember-goodness like properties, etc.
+This library is basically an Ember wrapper for my generic [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) library. This library adds all the Ember-goodness like properties, etc.
 See [String.interpolate.js](https://github.com/jayphelps/string.interpolate.js) documentation for additional configuration options like changing the identifier symbol to something other than `$`
 
 ## Security Considerations
