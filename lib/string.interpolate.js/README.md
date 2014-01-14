@@ -1,4 +1,4 @@
-String.interpolate.js
+String.interpolate.js v2.0
 =====================
 
 A generic string interpolation helper that is library agnostic.
@@ -29,12 +29,12 @@ var welcomeMessage = 'Welcome, $fullName! Expressions too: ${fullName.toUpperCas
 ```
 
 ##Disable String.prototype Extension
-If you'd prefer not to have it extend the native String prototype, before loading the library create an `ENV` object with `EXTEND_PROTOTYPES` set to false:
+If you'd prefer not to have it extend the native String prototype, before loading the library create an `InterpolatedString` object with `EXTEND_PROTOTYPES` set to false:
 
 ```javascript
 
-window.ENV = {
-  EXTEND_PROTOTYPES: false
+window.InterpolatedString = {
+    EXTEND_PROTOTYPES: false
 };
 
 ```

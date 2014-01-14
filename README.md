@@ -1,9 +1,7 @@
-Ember.String.interpolate v1.1
+Ember.String.interpolate v2.0
 =================
 
 Adds string interpolation as a computed property to Ember.js (i.e. no more unreadable getter concatenation).
-
-Version 2.0 (by the end of 2013) will contain several bugs fixes and a full test suite.
 
 ##Features
 * Inline property getter evaluation and observing/bindings!

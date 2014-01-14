@@ -1,6 +1,6 @@
 {
     "name": "Ember.String.interpolate",
-    "version": "1.1.0",
+    "version": "2.0",
     "description": "Adds interpolated string computed properties to Ember (i.e. no more unreadable getter concatenation)",
     "homepage": "https://github.com/jayphelps/ember.string.interpolate",
     "repository": {
