@@ -20,13 +20,13 @@ App.PersonController = Ember.ObjectController.extend({
     // you can chain any of the other methods like .volatile(), .meta(), etc
     fullName: '$firstName $lastName'.interpolate().readOnly(),
     
-    // Old way (many times even worse than this!)
+    // Old way
     welcomeMessage: function () {
-        return 'Welcome, ' + this.get('fullName') + '! Expressions too: ' + this.get('fullName').toUpperCase();
+        return 'Welcome, ' + this.get('fullName').toUpperCase() + '!';
     }.property('fullName'),
     
-    // New way!
-    welcomeMessage: 'Welcome, $fullName! Expressions too: ${fullName.toUpperCase()}'.interpolate()
+    // New way
+    welcomeMessage: 'Welcome, ${fullName.toUpperCase()}!'.interpolate()
 });
 ```
 
