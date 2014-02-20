@@ -40,7 +40,7 @@ Output:
 
 ```html
 <div>
-    <h1>Welcome, Bilbo Baggins! Expressions too: BILBO BAGGINS</h1>
+    <h1>Welcome, BILBO BAGGINS!</h1>
 </div>
 ```
 
