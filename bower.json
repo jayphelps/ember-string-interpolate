@@ -1,5 +1,5 @@
 {
-    "name": "Ember.String.interpolate",
+    "name": "ember-string-interpolate",
     "version": "2.0.0",
     "main": "./ember-string-interpolate.js",
     "dependencies": {
