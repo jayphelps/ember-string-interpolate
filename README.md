@@ -1,4 +1,4 @@
-Ember.String.interpolate v2.0
+Ember.String.interpolate v2.0 [![Dependency Status](https://www.versioneye.com/user/projects/536972d514c1583302000121/badge.png)](https://www.versioneye.com/user/projects/536972d514c1583302000121)
 =================
 
 Adds string interpolation as a computed property to Ember.js (i.e. no more unreadable getter concatenation).
