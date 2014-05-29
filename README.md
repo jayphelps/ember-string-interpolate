@@ -102,7 +102,7 @@ var userGeneratedString = prompt('Please enter exploitative code');
 ```
 
 ##Introduction Slideshow
-[![Introduction Slideshow](http://image.slidesharecdn.com/ember-140115002611-phpapp02/95/slide-1-638.jpg?cb=1389837534)](http://www.slideshare.net/jayphelps/emberstringinterpolate)
+[![Introduction Slideshow](http://image.slidesharecdn.com/ember-140115002611-phpapp02/95/slide-2-638.jpg?cb=1389837534)](http://www.slideshare.net/jayphelps/emberstringinterpolate)
 
 ##Contributing/Issues
 Forks, pull requests and issue tickets are encouraged.
