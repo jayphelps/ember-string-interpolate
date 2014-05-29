@@ -3,8 +3,6 @@ Ember.String.interpolate v2.0 [![Dependency Status](https://www.versioneye.com/u
 
 Adds string interpolation as a computed property to Ember.js (i.e. no more unreadable getter concatenation).
 
-[![Introduction Slideshow](http://image.slidesharecdn.com/ember-140115002611-phpapp02/95/slide-1-638.jpg?cb=1389837534)](http://www.slideshare.net/jayphelps/emberstringinterpolate)
-
 ##Features
 * Inline property getter evaluation and observing/bindings!
 * Inline expression evaluation
@@ -102,6 +100,9 @@ var userGeneratedString = prompt('Please enter exploitative code');
     userGeneratedString: userGeneratedString
 });
 ```
+
+##Introduction Slideshow
+[![Introduction Slideshow](http://image.slidesharecdn.com/ember-140115002611-phpapp02/95/slide-1-638.jpg?cb=1389837534)](http://www.slideshare.net/jayphelps/emberstringinterpolate)
 
 ##Contributing/Issues
 Forks, pull requests and issue tickets are encouraged.
